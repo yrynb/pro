@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自定义动画</title>
+  <script>
+    window.THING = {}
+
+  </script>
+</head>
+
+<body style="margin: 0;overflow-x: hidden;">
+  <div id="test"
+    style="width: 100%;height:1080px;background-image: url(../bg.png);background-size: 100% auto;background-repeat: no-repeat;">
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <script src="../conch/comp-1619750677494/comp.js"></script>
+
+  <script src="../Framework-dev.js"></script>
+  <script>
+    const frame = window.frame = new THING.Framework()
+    frame.registerComponent(THING.UI, 'UI', document.getElementById('test'), { canvasWidth: 1920, canvasHeight: 1080 })
+    const layer = frame.UI.createLayer()
+    const layer2 = frame.UI.createLayer({
+      x: 1250,
+      y: 0
+    })
+
+    const container1 = window.container1 = layer.createContainer({
+      style: {
+        width: 637,
+        height: 198,
+        top: 200,
+        left: 40
+      }
+    })
+
+    const container2 = layer.createContainer({
+      style: {
+        width: 628,
+        height: 205,
+        top: 462,
+        left: 40
+      }
+    })
+
+    const container3 = window.container3 = layer.createContainer({
+      style: {
+        width: 620,
+        height: 244,
+        left: 45,
+        top: 776
+      }
+    })
+
+    const container4 = layer2.createContainer({
+      style: {
+        width: 262,
+        height: 120,
+        left: 362,
+        top: 265
+      }
+    })
+
+    const container5 = layer2.createContainer({
+      style: {
+        width: 626,
+        height: 198,
+        left: 0,
+        top: 470
+      }
+    })
+
+    const container6 = layer2.createContainer({
+      style: {
+        width: 620,
+        height: 226,
+        left: 0,
+        top: 776
+      }
+    })
+
+    const prefix = "../conch/comp-1619750677494"
+
+    // 创建适配器实例
+    var adapter = container1.createAdapter("ConchAdapter", "C607542292927e2592c6a04b5")
+    // 初始化组件适配器
+    container1.initAdapter({ prefix })
+
+    // 创建适配器实例
+    container2.createAdapter("ConchAdapter", "C607938868972fb148a897041")
+    // 初始化组件适配器
+    container2.initAdapter({ prefix })
+
+    // container2.setOption({background: 'url(./cbg.png) no-repeat'})
+    // container2.setOption({backgroundSize: 'cover'})
+
+    // 创建适配器实例
+    container3.createAdapter("ConchAdapter", "C6078fb972927e2592c6a0525")
+    // 初始化组件适配器
+    container3.initAdapter({ prefix })
+
+    // 创建适配器实例
+    container4.createAdapter("ConchAdapter", "C606feb10d157ec45be1217ed")
+    // 初始化组件适配器
+    container4.initAdapter({ prefix })
+
+    // 创建适配器实例
+    container5.createAdapter("ConchAdapter", "C607938782927e2592c6a0537")
+    // 初始化组件适配器
+    container5.initAdapter({ prefix })
+
+    // 创建适配器实例
+    container6.createAdapter("ConchAdapter", "C6066c39e8579b074298ed8bf")
+    // 初始化组件适配器
+    container6.initAdapter({ prefix })
+
+
+    function custom() {
+      frame.UI.animation.registAnimation({
+        name: 'testCustom',
+        before: (ct) => console.log('before', ct),
+        tick: (ct) => {
+          const translateX = ct.style.translate[0]
+          const translateY = ct.style.translate[1]
+          ct.style.translate = [translateX + 10, translateY]
+        },
+        after: (ct) => console.log('after', ct)
+      })
+
+      frame.UI.animation.run({
+        target: [container3, container1],
+        animation: 'testCustom',
+        duration: 500,
+        delay: 1500
+      })
+    }
+
+  </script>
+</body>
+
+</html>

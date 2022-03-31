@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <title>解析spray-ps</title>
+  <!-- <script src="base.js"></script> -->
+</head>
+
+<body style="margin:0;padding: 0;">
+  <div id="test" style="width: 100%;height:100vh;background: url(./img/bg1.png) no-repeat;">
+    <button onclick="console.log(this)">test</button>
+  </div>
+  <div id="div3d" onclick="console.log(this)"style="width: 100%;height:100vh;position: absolute;top:0;left:0;"></div>
+  </div>
+</body>
+<script>
+  window.THING = {}
+
+</script>
+
+<script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
+<script src="./Framework-dev.js"></script>
+<script>
+
+  const frame = new THING.Framework()
+  frame.registerComponent(THING.UI, 'UI', document.getElementById('test'), {canvasWidth: 1920*2, canvasHeight: 1080*2})
+
+  
+  frame.UI.scenes.parseScenes({
+    basePath: './scene',
+    scenes: ['60a33b5e8fab9855cd7b3c6f','60a354cf8fab9855cd7b3c7f']
+    // basePath: './spray-scene-1625796705161',
+    // scenes: ['60e55784c3e5144432f92481']
+  })
+  function toggle() {
+    frame.UI.animation.toggle('60a354cf8fab9855cd7b3c7f')
+  }
+
+  function toggle2() {
+    frame.UI.animation.toggle('60a33b5e8fab9855cd7b3c6f')
+  }
+
+</script>
+
+</html>

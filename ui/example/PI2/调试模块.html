@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>调试模块</title>
+    <script>
+      window.THING = {}
+    </script>
+    <script src="../Framework-dev.js"></script>
+  </head>
+
+  <body>
+    <script>
+      class Comp {
+        apply(frame) {
+          frame.beforeInit.inject(() => {})
+          frame.beforeInit.inject(() => {}, 100)
+          frame.beforeLoad.inject(async () => {
+            await new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, 1000)
+            })
+          })
+        }
+      }
+      class Comp1 {
+        apply(frame) {
+          frame.beforeInit.inject(() => {})
+          frame.beforeInit.inject(() => {}, 100)
+          frame.beforeLoad.inject(async () => {
+            await new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, 1000)
+            })
+          })
+        }
+      }
+      class Comp2 {
+        apply(frame) {
+          frame.beforeInit.inject(() => {})
+          frame.beforeInit.inject(() => {}, 100)
+          frame.beforeLoad.inject(async () => {
+            await new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, 1000)
+            })
+          })
+        }
+      }
+      class Comp3 {
+        apply(frame) {
+          frame.beforeInit.inject(() => {})
+          frame.beforeInit.inject(() => {}, 100)
+          frame.beforeLoad.inject(async () => {
+            await new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, 1000)
+            })
+          })
+        }
+      }
+      class Comp4 {
+        apply(frame) {
+          frame.beforeInit.inject(() => {})
+          frame.beforeInit.inject(() => {}, 100)
+          frame.beforeLoad.inject(async () => {
+            await new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, 1000)
+            })
+          })
+        }
+      }
+      const frame = window.frame = new THING.Framework({
+        log: 0 //['error', 'warn', 'info']
+      })
+      frame.registerComponent(Comp, 'Comp')
+      frame.registerComponent(Comp1, 'Comp1')
+      frame.registerComponent(Comp2, 'Comp2')
+      frame.registerComponent(Comp3, 'Comp3')
+      frame.registerComponent(Comp4, 'Comp4')
+      frame.init()
+    </script>
+  </body>
+</html>

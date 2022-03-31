@@ -1,0 +1,99 @@
+stages:
+  - install_deps
+  - lint
+  - unit
+  - static_scan 
+  - build
+  - publish
+
+cache: &global_cache
+  key: ${CI_BUILD_REF_NAME}
+  paths:
+    - node_modules/
+    - dist/
+  policy: pull  # 只拉取缓存，不推送缓存。默认会即拉取，又推送。所以install_deps里需要覆盖此项。
+
+.branch_only: &branch_only
+  only:
+    - master
+    - develop
+
+# 安装依赖
+install_deps:
+  <<: *branch_only
+  stage: install_deps
+  retry: 2
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  script:
+    - npm install
+
+# 运行代码检测
+lint:
+  <<: *branch_only
+  stage: lint
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  script:
+    - npm run lint
+
+# 运行unit单元测试
+unit:
+  <<: *branch_only
+  stage: unit
+  script:
+    - npm run test
+  cache: 
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+     - node_modules/  
+     - coverage/  # 单元测试生成的lcov文件的目录地址 
+    # policy: pull 
+
+# 静态扫描模板
+.static_scan: &staticScanDef
+  <<: *branch_only
+  variables:
+    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" 
+    # GIT_DEPTH: "0"
+  cache:
+    key: "${CI_BUILD_REF_NAME}"
+    paths:
+      - .sonar/cache
+      - coverage
+      - node_modules/
+  stage: static_scan
+  retry:
+    max: 2
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure 
+
+# 静态扫描
+static_scan:
+  <<: *staticScanDef  
+  image: dk.uino.cn/sonar/scanner:1.0.12
+  script:
+    # 扫描路径sonar.sources需要对应修改，也可以在根目录下新建sonar-project.properties文件配置，不过没有-D。
+    # 后面的reportPaths是可选的，必须在上一步单元测试生成报告文件。如果配置了，就可以在sonar应用上看到单元测试覆盖率。
+    - kiss -Dsonar.sources=src -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+  # allow_failure: true
+
+build:
+  <<: *branch_only
+  stage: build
+  script:
+    - npm run build
+
+publish:
+  stage: publish
+  cache: 
+    <<: *global_cache
+  only:
+    - tags
+  script:
+    - npm publish

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>registComponent</title>
+  </head>
+  <body>
+    <div id="div3d"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./SceneLoader-v0.1.0.js"></script>
+    <script type="module">
+      // 基于ThingJs2.0环境及FrameWork框架
+      import * as THING from '../js/thing.module.js'
+      import Framework from '../Framework-dev.js'
+
+      const app = new THING.App()
+      const frame = new Framework()
+
+      app.background = 'gray'
+      const campus = {
+        url: 'campus2.json',
+        complete: function (ev) {
+          app.levelManager.change(ev.object)
+        }
+      }
+
+      // 注册3D组件
+      frame.registerComponent(SceneLoader, 'SceneLoader')
+      frame.SceneLoader.setCampus(campus)
+
+      // 注册Framework UI
+      frame.registerComponent(
+        Framework.UI,
+        'UI',
+        document.getElementById('div3d'),
+        { canvasWidth: 1920 * 2, canvasHeight: 1080 * 2, pointerEvents: true }
+      )
+
+      // 解析场景
+      frame.UI.scenes.parseScenes({
+        basePath: '../scene', // 场景文件夹
+        scenes: ['60a33b5e8fab9855cd7b3c6f', '60a354cf8fab9855cd7b3c7f'] // 场景json文件
+      })
+
+      frame.init()
+    </script>
+  </body>
+</html>

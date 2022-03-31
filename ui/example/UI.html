@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>debug input</title>
+  <script>
+    window.THING = {}
+
+  </script>
+</head>
+
+<body style="margin: 0;overflow-x: hidden;">
+  <div id="test"
+    style="width: 100%;height:1080px;background-image: url(./bg.png);background-size: 100% auto;background-repeat: no-repeat;">
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+  <script src="./conch/comp-1619750677494/comp.js"></script>
+
+  <script src="./Framework-dev.js"></script>
+  <script>
+    const frame = new THING.Framework()
+    frame.registerComponent(THING.UI, 'UI', document.getElementById('test'), {
+      canvasWidth: 1920,
+      canvasHeight: 1080,
+      isDrag: true
+    })
+    const layer = frame.UI.createLayer()
+    const layer2 = frame.UI.createLayer({
+      x: 1250,
+      y: 0
+    })
+    const layer3 = frame.UI.createLayer()
+
+    const container1 = layer.createContainer({
+      id: 1,
+      style: {
+        width: 637,
+        height: 198,
+        top: 200,
+        left: 40
+      }
+    })
+
+    const container2 = layer.createContainer({
+      id: 2,
+      style: {
+        width: 628,
+        height: 205,
+        top: 462,
+        left: 40
+      }
+    })
+
+    const container3 = layer.createContainer({
+      id: 3,
+      style: {
+        width: 620,
+        height: 244,
+        left: 45,
+        top: 776
+      }
+    })
+
+    const container4 = layer2.createContainer({
+      id: 4,
+      style: {
+        width: 262,
+        height: 120,
+        left: 362,
+        top: 265
+      }
+    })
+
+    const container5 = layer2.createContainer({
+      id: 5,
+      style: {
+        width: 626,
+        height: 198,
+        left: 0,
+        top: 470
+      }
+    })
+
+    const container6 = layer2.createContainer({
+      id: 6,
+      style: {
+        width: 620,
+        height: 226,
+        left: 0,
+        top: 776
+      }
+    })
+
+    const container7 = layer3.createContainer({
+      id: 1,
+      style: {
+        width: 637,
+        height: 198,
+        top: 200,
+        left: 40
+      }
+    })
+
+    const container8 = layer3.createContainer({
+      id: 2,
+      style: {
+        width: 628,
+        height: 205,
+        top: 462,
+        left: 40
+      }
+    })
+
+    const container9 = layer3.createContainer({
+      id: 3,
+      style: {
+        width: 620,
+        height: 244,
+        left: 45,
+        top: 776
+      }
+    })
+
+    const container10 = layer3.createContainer({
+      id: 4,
+      style: {
+        width: 620,
+        height: 244,
+        left: 1250,
+        top: 180
+      }
+    })
+
+    const container11 = layer3.createContainer({
+      id: 5,
+      style: {
+        width: 626,
+        height: 198,
+        left: 1250,
+        top: 470
+      }
+    })
+
+    const container12 = layer3.createContainer({
+      id: 6,
+      style: {
+        width: 620,
+        height: 226,
+        left: 1250,
+        top: 756
+      }
+    })
+
+
+    // container6.show()
+    console.log('container1', container1)
+
+    // 创建适配器实例
+    var adapter = container1.createAdapter("ConchAdapter", "C607542292927e2592c6a04b5")
+    // 初始化组件适配器
+    container1.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // container1.setOption({background: 'url(./cbg.png) no-repeat'})
+    // container1.setOption({backgroundSize: 'cover'})
+
+
+    // 创建适配器实例
+    container2.createAdapter("ConchAdapter", "C607938868972fb148a897041")
+    // 初始化组件适配器
+    container2.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // container2.setOption({background: 'url(./cbg.png) no-repeat'})
+    // container2.setOption({backgroundSize: 'cover'})
+
+    // 创建适配器实例
+    container3.createAdapter("ConchAdapter", "C6078fb972927e2592c6a0525")
+    // 初始化组件适配器
+    container3.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // 创建适配器实例
+    container4.createAdapter("ConchAdapter", "C606feb10d157ec45be1217ed")
+    // 初始化组件适配器
+    container4.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // 创建适配器实例
+    container5.createAdapter("ConchAdapter", "C607938782927e2592c6a0537")
+    // 初始化组件适配器
+    container5.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // 创建适配器实例
+    container6.createAdapter("ConchAdapter", "C6066c39e8579b074298ed8bf")
+    // 初始化组件适配器
+    container6.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    container1.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // container1.setOption({background: 'url(./cbg.png) no-repeat'})
+    // container1.setOption({backgroundSize: 'cover'})
+
+    container12.createAdapter("ConchAdapter", "C607542292927e2592c6a04b5")
+    // 初始化组件适配器
+    container12.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // 创建适配器实例
+    container11.createAdapter("ConchAdapter", "C607938868972fb148a897041")
+    // 初始化组件适配器
+    container11.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // container2.setOption({background: 'url(./cbg.png) no-repeat'})
+    // container2.setOption({backgroundSize: 'cover'})
+
+    // 创建适配器实例
+    container10.createAdapter("ConchAdapter", "C6078fb972927e2592c6a0525")
+    // 初始化组件适配器
+    container10.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // 创建适配器实例
+    container9.createAdapter("ConchAdapter", "C606feb10d157ec45be1217ed")
+    // 初始化组件适配器
+    container9.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // 创建适配器实例
+    container8.createAdapter("ConchAdapter", "C607938782927e2592c6a0537")
+    // 初始化组件适配器
+    container8.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    // 创建适配器实例
+    container7.createAdapter("ConchAdapter", "C6066c39e8579b074298ed8bf")
+    // 初始化组件适配器
+    container7.initAdapter({
+      prefix: "./conch/comp-1619750677494"
+    })
+
+    function testArrTarget() {
+      frame.UI.animation.run(
+        [{
+            target: [container1, container2],
+            animation: {
+              translate: [220, 10],
+            },
+            duration: 1000,
+            delay: 1000,
+          },
+          {
+            target: container1,
+            animation: {
+              opacity: 0,
+            },
+            duration: 200,
+            delay: 1000,
+          }
+        ]
+      )
+    }
+    // doAnimation()
+    function doAnimation() {
+      frame.UI.animation.run(
+        [{
+          target: container1,
+          animation: {
+            translate: [1240, 576]
+          },
+          duration: 500,
+          delay: 3000,
+          callback: () => {
+            console.log('doAnimation：container1 => delay: 3000')
+          }
+        }, {
+          target: container6,
+          animation: {
+            translate: [-1230, -606]
+          },
+          duration: 1000,
+          callback: () => {
+            console.log('doAnimation：container6')
+          }
+        }],
+        // 整个队列执行完成之后的回调
+        () => {
+          console.log('doAnimation：第一队列执行完毕')
+        }
+      ).run(
+        [{
+          target: container3,
+          animation: {
+            translate: [1240, -606]
+          },
+          duration: 500,
+          callback: () => {
+            console.log('doAnimation：container3')
+          }
+        }, {
+          target: container4,
+          animation: {
+            translate: [-1580, 506]
+          },
+          duration: 500,
+          delay: 3000,
+          callback: () => {
+            console.log('doAnimation：container4')
+          }
+        }],
+        () => {
+          console.log('doAnimation：第二队列执行完毕')
+        }
+      )
+    }
+    // doAnimation2()
+    function doAnimation2() {
+      frame.UI.animation.run({
+        target: container1,
+        animation: {
+          translate: [1240, 576]
+        },
+        duration: 500,
+        callback: () => {}
+      }).run({
+        target: container3,
+        animation: {
+          translate: [1240, -606]
+        },
+        duration: 500,
+        callback: () => {}
+      })
+    }
+
+    frame.UI.scenes.divideScene(layer3, '333')
+    frame.UI.scenes.divideScene(layer, '111')
+    frame.UI.scenes.divideScene(layer2, '111')
+    // toggle()
+    function toggle() {
+      frame.UI.animation.toggle([layer.sceneId, layer3.sceneId])
+    }
+
+    function custom() {
+      frame.UI.animation.registAnimation({
+        name: 'testCustom',
+        before: (ct) => console.log('before', ct),
+        tick: (ct) => {
+          const translateX = ct.style.translate[0]
+          const translateY = ct.style.translate[1]
+          ct.style.translate = [translateX + 10, translateY]
+        },
+        after: (ct) => console.log('after', ct)
+      })
+
+      frame.UI.animation.run({
+        target: [container3, container1],
+        animation: 'testCustom',
+        duration: 500,
+        delay: 1500
+      })
+    }
+
+    function toggle2() {
+      frame.UI.animation.toggle([{
+        target: layer, // 图层
+        animation: 'fromLeft', // 动画效果
+        duration: 1000, // 动画持续时长
+        callback: () => {},
+
+      }, {
+        target: layer2,
+        animation: 'fromRight',
+        duration: 1000,
+        callback: () => {},
+
+      }])
+    }
+    // layer.hide()
+    // layer2.hide()
+    layer3.hide()
+    // frame.UI.destroy()
+
+  </script>
+</body>
+
+</html>

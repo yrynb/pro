@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Framework</title>
+  <script>
+    window.THING = {}
+  </script>
+  <script src="./Framework-dev.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      padding: 30px;
+    }
+
+    a {
+      margin: 10px 0;
+      background: #409EFF;
+      text-decoration: none;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    a:hover {
+      opacity: .7;
+    }
+  </style>
+</head>
+
+<body>
+  <p>事件触发</p>
+  <a href="javascript:void(0)" id="btn4">组件通过this.emit触发框架的test事件</a>
+  <a href="javascript:void(0)" id="btn5">组件Comp2通过this.emit触发组件Comp的eventMixin事件，并传递参数</a>
+  <a href="javascript:void(0)" id="btn6">组件Comp2通过this.emit触发组件Comp、组件Comp2中所有的eventMixin事件</a>
+  <p>事件销毁</p>
+  <a href="javascript:void(0)" id="btn7">使用this.off销毁组件Comp的eventMixin事件</a>
+  <a href="javascript:void(0)" id="btn8">使用this.clear销毁组件Comp2中的所有eventMixin事件</a>
+  <a href="javascript:void(0)" id="btn9">使用this.clearAll销毁所有eventMixin事件</a>
+  <script>
+    class Comp {
+      constructor(param1, param2) {
+        this.init()
+      }
+      init() {
+        let _this = this
+        let _eventFunc = params => {
+          console.log(`触发组件Comp的eventMixin事件，参数为：${params}`)
+        }
+        this.on('eventMixin', _eventFunc, _this)
+        // 销毁组件Comp的eventMixin事件
+        doEvent('btn7', function () {
+          _this.off('eventMixin', _eventFunc)
+        })
+      }
+      apply(frame) {
+        let _this = this
+        // 组件通过this.emit触发框架的test事件
+        doEvent('btn4', function () {
+          _this.emit('test')
+        })
+
+        // 组件监听框架的 生命周期
+        frame.on('afterLoadEvent', () => {
+          console.log('组件监听框架的生命周期 =》 afterLoadEvent')
+        })
+      }
+    }
+
+    class Comp2 {
+      constructor() {
+        this.init()
+      }
+      init() {
+        let _this = this;
+        let _eventFunc = params => {
+          console.log(`只获取组件Comp2的eventMixin事件-1`)
+        }
+        let _eventFunc1 = params => {
+          console.log(`只获取组件Comp2的eventMixin事件-2`)
+        }
+        this.on('eventMixin', _eventFunc)
+        this.on('eventMixin', _eventFunc1)
+
+        // 组件Comp2通过this.emit触发组件Comp的eventMixin事件，并传递参数
+        doEvent('btn5', function () {
+          _this.emit('Comp:eventMixin', 123)
+        })
+        // 触发组件Comp、组件Comp2中所有的eventMixin事件
+        doEvent('btn6', function () {
+          _this.emit('eventMixin', 123)
+        })
+
+        // 销毁组件Comp2中的所有eventMixin事件
+        doEvent('btn8', function () {
+          _this.clear('eventMixin')
+        })
+        // 销毁所有eventMixin事件
+        doEvent('btn9', function () {
+          _this.clearAll('eventMixin')
+        })
+      }
+    }
+
+    const frame = new THING.Framework()
+    frame.registerComponent(Comp, 'Comp', 'param1', 'param2')
+    frame.registerComponent(Comp2, 'Comp2')
+
+    // 框架通过frame.on注册事件：test
+    frame.on('test', () => {
+      console.log('组件调用框架的test事件')
+    })
+
+    frame.init().then(() => {
+      console.log('frame init is end')
+    })
+
+    /*
+     * @desc 按钮点击事件方法
+     */
+    function doEvent(id, callback) {
+      if (!(callback && typeof callback === 'function')) return
+      document.getElementById(id).addEventListener('click', callback)
+    }
+  </script>
+</body>
+
+</html>

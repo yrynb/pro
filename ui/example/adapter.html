@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UI</title>
+  </head>
+  <body>
+    <div id="test"></div>
+
+    <script>
+      window.THING = {}
+    </script>
+
+    <script src="./UI-dev.js"></script>
+    <script type="module">
+      
+      import ExampleAdapter from './ExampleAdapter.js'
+      const frame = new THING.UI()
+      
+      frame.registerComponent(THING.UI, 'UI', document.getElementById('test'), {
+        canvasWidth: 500,
+        canvasHeight: 500
+      })
+      const layer = frame.UI.createLayer()
+      
+      
+      frame.UI.adapter.regist('ExampleAdapter', ExampleAdapter)
+      const container1 = layer.createContainer({
+        id: 1,
+        style: {
+          width: 1920,
+          height: 1080,
+          left: 0,
+          top: 0
+        }
+      })
+
+      container1.createAdapter('ExampleAdapter')
+      // 初始化组件适配器
+      container1.initAdapter()
+
+    </script>
+  </body>
+</html>
